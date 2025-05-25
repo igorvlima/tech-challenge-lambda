@@ -17,7 +17,6 @@ public class CpfAuthHandler implements RequestHandler<Map<String, Object>, Map<S
             .region(Region.of(System.getenv("AWS_REGION")))
             .credentialsProvider(DefaultCredentialsProvider.create())
             .build();
-
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
