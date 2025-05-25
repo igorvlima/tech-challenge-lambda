@@ -31,9 +31,9 @@ resource "aws_lambda_function" "auth_lambda" {
 
   environment {
     variables = {
-      USER_POOL_ID  = var.user_pool_id
-      CLIENT_ID     = var.client_id
-      DEFAULT_PASS  = var.default_pass
+      USER_POOL_ID  = "us-east-1_G4nHXEXHm"
+      CLIENT_ID     = "7h8o2k5avaevkum4s4rpd1t98e"
+      DEFAULT_PASS  = "SenhaF0rte!"
     }
   }
 }
