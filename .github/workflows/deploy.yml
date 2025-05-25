@@ -39,5 +39,5 @@ jobs:
         run: |
           echo "Deploying Lambda..."
           aws lambda update-function-configuration \
-            --function-name minha-lambda \
+            --function-name cpf-auth-lambda \
             --environment "Variables={USER_POOL_ID=$USER_POOL_ID,USER_POOL_CLIENT_ID=$USER_POOL_CLIENT_ID,COGNITO_DUMMY_PASSWORD=$COGNITO_DUMMY_PASSWORD}"
