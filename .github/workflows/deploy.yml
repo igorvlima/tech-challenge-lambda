@@ -44,7 +44,7 @@ jobs:
           # Atualiza o código da função com o .jar gerado pelo Gradle
           aws lambda update-function-code \
             --function-name cpf-auth-lambda \
-            --zip-file fileb://build/libs/lambda-0.0.1-SNAPSHOT.jar
+            --zip-file fileb://build/libs/fiap-tech-challenge-lambda-0.0.1-SNAPSHOT.jar
 
           # Atualiza as variáveis de ambiente
           aws lambda update-function-configuration \
