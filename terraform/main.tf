@@ -27,7 +27,7 @@ resource "aws_lambda_function" "auth_lambda" {
   handler = "com.example.fiaptechchallengelambda.CpfAuthHandler::handleRequest"
   runtime       = "java17"
   filename         = "${path.module}/lambda/lambda.zip"
-  //source_code_hash = filebase64sha256("${path.module}/lambda/lambda.zip")
+  source_code_hash = filebase64sha256("${path.module}/lambda/lambda.zip")
 
   #environment {
     #variables = {
