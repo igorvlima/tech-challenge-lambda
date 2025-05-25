@@ -24,6 +24,7 @@ jobs:
           aws-region: us-east-1
 
       - name: Terraform Plan
+        working-directory: terraform
         run: |
           terraform plan -input=false \
             -var="user_pool_id=${{ secrets.COGNITO_USER_POOL_ID }}" \
