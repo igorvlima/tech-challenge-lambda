@@ -24,10 +24,11 @@ resource "aws_iam_role_policy_attachment" "lambda_logs" {
 resource "aws_lambda_function" "auth_lambda" {
   function_name = "cpf-auth-lambda"
   role          = aws_iam_role.lambda_exec_role.arn
-  #handler = "com.example.fiaptechchallengelambda.CpfAuthHandler::handleRequest"
+  handler       = "com.example.fiaptechchallengelambda.CpfAuthHandler::handleRequest"
   runtime       = "java17"
-  #filename         = "${path.module}/lambda/lambda.zip"
-  #source_code_hash = filebase64sha256("${path.module}/lambda/lambda.zip")
+
+  filename         = "${path.module}/../build/libs/lambda-0.0.1-SNAPSHOT.jar"
+  source_code_hash = filebase64sha256("${path.module}/../build/libs/lambda-0.0.1-SNAPSHOT.jar")
 
   #environment {
     #variables = {
