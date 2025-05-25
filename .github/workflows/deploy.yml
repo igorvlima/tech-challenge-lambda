@@ -32,8 +32,9 @@ jobs:
         run: |
           terraform plan -input=false \
             -var="user_pool_id=${{ secrets.COGNITO_USER_POOL_ID }}" \
-            -var="client_id=${{ secrets.COGNITO_CLIENT_ID}}" \
-            -var="default_pass=${{ secrets.DEFAULT_PASS}}"
+            -var="client_id=${{ secrets.COGNITO_CLIENT_ID }}" \
+            -var="default_pass=${{ secrets.DEFAULT_PASS }}"
+
 
       - name: Terraform Apply
         working-directory: terraform
