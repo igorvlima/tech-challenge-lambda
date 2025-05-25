@@ -28,14 +28,6 @@ resource "aws_lambda_function" "auth_lambda" {
   runtime       = "java17"
   filename         = "${path.module}/lambda/lambda.zip"
   source_code_hash = filebase64sha256("${path.module}/lambda/lambda.zip")
-
-  #environment {
-    #variables = {
-      #USER_POOL_ID  = "us-east-1_G4nHXEXHm"
-      #CLIENT_ID     = "7h8o2k5avaevkum4s4rpd1t98e"
-      #DEFAULT_PASS  = "SenhaF0rte!"
-    #}
-  #}
 }
 
 resource "aws_apigatewayv2_api" "http_api" {
