@@ -24,10 +24,10 @@ jobs:
           aws-region: us-east-1  # ou sua região
 
       - name: Terraform Init
-        run: terraform init
+        run: terraform -chdir=fiap-tech-challenge-lambda/terraform init
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve
+        run: terraform -chdir=fiap-tech-challenge-lambda/terraform apply -auto-approve
 
       - name: Capture Terraform Outputs
         id: tf_outputs
