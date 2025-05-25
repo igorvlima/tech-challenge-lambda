@@ -31,12 +31,6 @@ jobs:
         working-directory: terraform
         run: terraform apply -auto-approve
 
-      - name: Capture Terraform Outputs
-        id: tf_outputs
-        run: |
-          echo "USER_POOL_ID=$(terraform output -raw user_pool_id)" >> $GITHUB_ENV
-          echo "USER_POOL_CLIENT_ID=$(terraform output -raw user_pool_client_id)" >> $GITHUB_ENV
-
       - name: Deploy Lambda
         env:
           USER_POOL_ID: ${{ secrets.COGNITO_USER_POOL_ID }}
@@ -44,9 +38,6 @@ jobs:
           COGNITO_DUMMY_PASSWORD: ${{ secrets.DEFAULT_PASS }}
         run: |
           echo "Deploying Lambda..."
-          echo "Using USER_POOL_ID=$USER_POOL_ID"
-          echo "Using USER_POOL_CLIENT_ID=$USER_POOL_CLIENT_ID"
-          # Aqui você pode rodar o deploy da lambda, exemplo usando AWS CLI:
           aws lambda update-function-configuration \
             --function-name minha-lambda \
             --environment "Variables={USER_POOL_ID=$USER_POOL_ID,USER_POOL_CLIENT_ID=$USER_POOL_CLIENT_ID,COGNITO_DUMMY_PASSWORD=$COGNITO_DUMMY_PASSWORD}"
