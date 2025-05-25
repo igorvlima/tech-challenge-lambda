@@ -31,13 +31,23 @@ jobs:
         working-directory: terraform
         run: terraform apply -auto-approve
 
+      - name: Build  image
+        run: ./gradlew build -x test
+
       - name: Deploy Lambda
         env:
-          USER_POOL_ID: ${{ secrets.COGNITO_USER_POOL_ID }}
-          USER_POOL_CLIENT_ID: ${{ secrets.COGNITO_CLIENT_ID }}
-          COGNITO_DUMMY_PASSWORD: ${{ secrets.DEFAULT_PASS }}
+          CLIENT_ID: ${{ secrets.COGNITO_CLIENT_ID }}
+          DEFAULT_PASS: ${{ secrets.DEFAULT_PASS }}
         run: |
           echo "Deploying Lambda..."
+
+          # Atualiza o código da função com o .jar gerado pelo Gradle
+          aws lambda update-function-code \
+            --function-name cpf-auth-lambda \
+            --zip-file fileb://build/libs/lambda-0.0.1-SNAPSHOT.jar
+
+          # Atualiza as variáveis de ambiente
           aws lambda update-function-configuration \
             --function-name cpf-auth-lambda \
-            --environment "Variables={USER_POOL_ID=$USER_POOL_ID,USER_POOL_CLIENT_ID=$USER_POOL_CLIENT_ID,COGNITO_DUMMY_PASSWORD=$COGNITO_DUMMY_PASSWORD}"
+            --environment "Variables={CLIENT_ID=$CLIENT_ID,DEFAULT_PASS=$DEFAULT_PASS}"
+
